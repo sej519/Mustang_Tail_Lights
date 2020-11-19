@@ -1,0 +1,19 @@
+library IEEE;
+USE IEEE.Std_logic_1164.all;
+
+entity BrakeLights is-- setting up the input and output nodes. you have to add the brakes in this code
+	port (LeftBlinker, RightBlinker, Brake, Clock: in bit; L1, L2, L3, R1, R2, R3: out bit);
+end BrakeLights;
+
+architecture Behaviour of BrakeLights is
+begin
+--All 3 Left lights have the same code as we want them to do the same thing and we treated them as one entity in the kMaps
+	L1 <= (RightBlinker AND Brake) OR (NOT(LeftBlinker) AND Brake);
+	L2 <= (RightBlinker AND Brake) OR (NOT(LeftBlinker) AND Brake);
+	L3 <= (RightBlinker AND Brake) OR (NOT(LeftBlinker) AND Brake);
+--All 3 Right lights have the same code as we want them to do the same thing and we treated them as one entity in the kMaps
+	R1 <= (LeftBlinker AND Brake) OR (NOT(RightBlinker) AND Brake);
+	R2 <= (LeftBlinker AND Brake) OR (NOT(RightBlinker) AND Brake);
+	R3 <= (LeftBlinker AND Brake) OR (NOT(RightBlinker) AND Brake);
+end;
+
