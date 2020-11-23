@@ -1,0 +1,26 @@
+library IEEE;
+USE IEEE.Std_logic_1164.all;
+
+entity MustangLights is-- setting up the input and output nodes
+	port (LeftBlinker, RightBlinker, Brake, Clock: in bit; L1, L2, L3, R1, R2, R3: out bit);
+end MustangLights;
+
+
+architecture Behaviour of MustangLights is
+signal Q1, Q2: bit;--this is not a direct input or output that we want to see from the system so it is set up as a signal as we still need them to have the flipflops switch states
+begin
+process(Clock)
+	begin
+		if (Clock'event and Clock='0')then-- This is the code for the Flip flops which I chose to get triggered by the falling edge instead of the rising
+			Q1 <= (NOT(LeftBlinker) AND RightBlinker AND NOT(Q1) AND Q2) OR (LeftBlinker AND NOT(RightBlinker) AND NOT(Q1) AND Q2) OR (RightBlinker AND Q1 AND NOT(Q2)) OR (LeftBlinker AND Q1 AND NOT(Q2));
+			Q2 <= (RightBlinker AND NOT(Q2)) OR (LeftBlinker AND NOT(Q2));
+		end if;
+	end process;
+	-- The following code is the equations for each of the lights which we got from the KMaps
+	L3 <=(((LeftBlinker AND RightBlinker AND NOT(Q2)) OR (LeftBlinker AND Q1 AND NOT(Q2))) OR (NOT(LeftBlinker) AND Brake));
+	L2 <=((LeftBlinker AND RightBlinker AND NOT(Q2)) OR (LeftBlinker AND NOT(RightBlinker) AND NOT(Q1) AND Q2) OR (LeftBlinker AND Q1 AND NOT(Q2))) OR ((RightBlinker AND Brake) OR (NOT(LeftBlinker) AND Brake));
+	L1 <=(((LeftBlinker AND NOT(Q2)) OR (LeftBlinker AND NOT(RightBlinker) AND NOT(Q1))) OR (NOT(LeftBlinker) AND Brake));
+	R1 <=((RightBlinker AND NOT(Q2)) OR (NOT(LeftBlinker) AND RightBlinker AND NOT(Q1))) OR ((LeftBlinker AND Brake) OR (NOT(RightBlinker) AND Brake));
+	R2 <=(((LeftBlinker AND RightBlinker AND NOT(Q2)) OR (NOT(LeftBlinker) AND RightBlinker AND NOT(Q1) AND Q2) OR (RightBlinker AND Q1 AND NOT(Q2))) OR (NOT(RightBlinker) AND Brake));
+	R3 <=((LeftBlinker AND RightBlinker AND NOT(Q2)) OR (RightBlinker AND Q1 AND NOT(Q2))) OR ((LeftBlinker AND Brake) OR (NOT(RightBlinker) AND Brake)) ;
+end ;
