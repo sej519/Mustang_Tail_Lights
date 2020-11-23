@@ -17,10 +17,10 @@ process(Clock)
 		end if;
 	end process;
 	-- The following code is the equations for each of the lights which we got from the KMaps
-	L3 <=(((LeftBlinker AND RightBlinker AND NOT(Q2)) OR (LeftBlinker AND Q1 AND NOT(Q2))) OR (NOT(LeftBlinker) AND Brake));
-	L2 <=((LeftBlinker AND RightBlinker AND NOT(Q2)) OR (LeftBlinker AND NOT(RightBlinker) AND NOT(Q1) AND Q2) OR (LeftBlinker AND Q1 AND NOT(Q2))) OR ((RightBlinker AND Brake) OR (NOT(LeftBlinker) AND Brake));
-	L1 <=(((LeftBlinker AND NOT(Q2)) OR (LeftBlinker AND NOT(RightBlinker) AND NOT(Q1))) OR (NOT(LeftBlinker) AND Brake));
-	R1 <=((RightBlinker AND NOT(Q2)) OR (NOT(LeftBlinker) AND RightBlinker AND NOT(Q1))) OR ((LeftBlinker AND Brake) OR (NOT(RightBlinker) AND Brake));
-	R2 <=(((LeftBlinker AND RightBlinker AND NOT(Q2)) OR (NOT(LeftBlinker) AND RightBlinker AND NOT(Q1) AND Q2) OR (RightBlinker AND Q1 AND NOT(Q2))) OR (NOT(RightBlinker) AND Brake));
-	R3 <=((LeftBlinker AND RightBlinker AND NOT(Q2)) OR (RightBlinker AND Q1 AND NOT(Q2))) OR ((LeftBlinker AND Brake) OR (NOT(RightBlinker) AND Brake)) ;
+	L3 <=(((LeftBlinker AND RightBlinker AND NOT(Q2)) OR (LeftBlinker AND Q1 AND NOT(Q2))) OR ((RightBlinker AND Brake) OR (NOT(LeftBlinker) AND Brake)));
+	L2 <=(((LeftBlinker AND RightBlinker AND NOT(Q2)) OR (LeftBlinker AND NOT(RightBlinker) AND NOT(Q1) AND Q2) OR (LeftBlinker AND Q1 AND NOT(Q2))) OR ((RightBlinker AND Brake) OR (NOT(LeftBlinker) AND Brake)));
+	L1 <=(((LeftBlinker AND NOT(Q2)) OR (LeftBlinker AND NOT(RightBlinker) AND NOT(Q1))) OR ((RightBlinker AND Brake) OR (NOT(LeftBlinker) AND Brake)));
+	R1 <=(((RightBlinker AND NOT(Q2)) OR (NOT(LeftBlinker) AND RightBlinker AND NOT(Q1))) OR ((LeftBlinker AND Brake) OR (NOT(RightBlinker) AND Brake)));
+	R2 <=(((LeftBlinker AND RightBlinker AND NOT(Q2)) OR (NOT(LeftBlinker) AND RightBlinker AND NOT(Q1) AND Q2) OR (RightBlinker AND Q1 AND NOT(Q2))) OR ((LeftBlinker AND Brake) OR (NOT(RightBlinker) AND Brake)));
+	R3 <=(((LeftBlinker AND RightBlinker AND NOT(Q2)) OR (RightBlinker AND Q1 AND NOT(Q2))) OR ((LeftBlinker AND Brake) OR (NOT(RightBlinker) AND Brake)));
 end ;
